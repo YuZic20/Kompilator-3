@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace WpfApp5
 {
@@ -23,6 +25,29 @@ namespace WpfApp5
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void Run_Click(object sender, RoutedEventArgs e)
+        {
+            string CodeToRun = TextBlock.Text;
+       
+
+            if (CodeToRun == "")
+            {
+                Output.Text = "Zadej nějáké data";
+                return;
+            }
+            try
+            {
+                Output.Text =  (await CSharpScript.EvaluateAsync(TextBlock.Text)).ToString();
+            }
+            catch (CompilationErrorException s)
+            {
+                Output.Text =  (string.Join(Environment.NewLine, s.Diagnostics)).ToString();
+            }
+
+            
+            
         }
     }
 }
