@@ -12,7 +12,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <TextBox AcceptsReturn="True" Name="TextBlock" Background="White" Margin="5 5 5 5" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Input" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="0" />
+        <TextBox AcceptsReturn="True" Name="TextBlock" Background="White" Margin="5 5 5 5" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="0" />
         <TextBlock Name="Output" Background="White" Margin="5 5 5 5" HorizontalAlignment="Stretch" Grid.Row="2" TextWrapping="Wrap" Text="Output" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
         <Button Background="White"  Content="Run" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Name="Run" Click="Run_Click"/>
     </Grid>

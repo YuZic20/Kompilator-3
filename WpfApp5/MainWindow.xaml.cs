@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -22,15 +23,17 @@ namespace WpfApp5
     /// </summary>
     public partial class MainWindow : Window
     {
+        Player Hrac = new Player("Apolo", 10, 5, 20);
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private async void Run_Click(object sender, RoutedEventArgs e)
         {
             string CodeToRun = TextBlock.Text;
-       
+            
 
             if (CodeToRun == "")
             {
@@ -39,15 +42,22 @@ namespace WpfApp5
             }
             try
             {
-                Output.Text =  (await CSharpScript.EvaluateAsync(TextBlock.Text)).ToString();
+                var metadata = MetadataReference.CreateFromFile(typeof(Item).Assembly.Location);
+                Output.Text = (await CSharpScript.RunAsync(
+                CodeToRun
+                , options: ScriptOptions.Default.WithReferences(metadata)
+                , globals: Hrac)).ToString();
+
             }
             catch (CompilationErrorException s)
             {
                 Output.Text =  (string.Join(Environment.NewLine, s.Diagnostics)).ToString();
             }
-
-            
-            
+            /*
+            using WpfApp5;
+            Item Input = new Item("meč", 10);
+            Items.Add(Input);
+            */
         }
     }
 }
