@@ -47,7 +47,7 @@ namespace WpfApp5
             {
                 //WithImports("System.Collections.Generic")
                 var metadata = MetadataReference.CreateFromFile(typeof(Item).Assembly.Location);
-                ScriptOptions options = ScriptOptions.Default.WithReferences(metadata);//.WithImports("System.Collections.Generic");
+                ScriptOptions options = ScriptOptions.Default.WithReferences(metadata).WithImports("System.Collections.Generic");
 
 
                 Output.Text = (await CSharpScript.RunAsync(
