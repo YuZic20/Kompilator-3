@@ -9,7 +9,7 @@ namespace WpfApp5
     public class Item
     {
         public string Name = "";
-        public int Value = 0;
+        public float Value = 0;
 
         public Item(string IName, int IValue)
         {
